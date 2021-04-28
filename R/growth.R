@@ -1,11 +1,11 @@
 #' @export
-growthFunction <- function(x, s, dataset) {
+growthFunction <- function(x, s, dataset, growthData) {
   # switch(P(sim)$dataset,
   switch(dataset,
          "Berryman1979_fit" = {
            # function(x, s, dataset) {
            # TODO: check this works
-           m <- lm(log10Rt ~ poly(log10Xtm1, 3, raw = TRUE), data = mod$growthData)
+           m <- lm(log10Rt ~ poly(log10Xtm1, 3, raw = TRUE), data = growthData)
            s * unname(predict(m, newdata = data.frame(log10Xtm1 = x)))
            # }
          },
@@ -30,7 +30,7 @@ growthFunction <- function(x, s, dataset) {
            }
 
            # use 2004 data as baseline for unweakened hosts (i.e., a good year for trees)
-           m <- lm(amc::logit(PropKilled) ~ log(Attacked), data = subset(mod$growthData, Year == "2004"))
+           m <- lm(amc::logit(PropKilled) ~ log(Attacked), data = subset(growthData, Year == "2004"))
            a <- 0.85            ## a: slope parameter, how quickly the curve drops off
            d <- 3               ## d: slope parameter [1,Inf)
            r <- 0.2             ## r: relative stocking value (0,1) ## TODO: link this to stand depletion
@@ -47,8 +47,8 @@ growthFunction <- function(x, s, dataset) {
 }
 
 #' @export
-xt <- function(xtminus1, cs, dataset, massAttacksMap) {
+xt <- function(xtminus1, cs, dataset, massAttacksMap, growthData) {
   map.res <- xres(massAttacksMap) ## TODO: fix this, not scoped in this fn
-  per.ha <- 10^growthFunction(log10(xtminus1), cs, dataset) * xtminus1 ## TODO: something is off about this
+  per.ha <- 10^growthFunction(log10(xtminus1), cs, dataset, growthData) * xtminus1 ## TODO: something is off about this
   return(map.res * per.ha)
 }
