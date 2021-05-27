@@ -13,7 +13,7 @@ utils::globalVariables(c("."))
 #' @export
 #' @importFrom magrittr %>%
 #' @importFrom reproducible prepInputs
-#' @importFrom sf st_read st_transform
+#' @importFrom sf st_read st_transform st_union
 mpbStudyArea <- function(ecoregions = c(112, 120, 122, 124, 126), targetCRS, cPath, dPath) {
   shp <- prepInputs(url = "http://sis.agr.gc.ca/cansis/nsdb/ecostrat/region/ecoregion_shp.zip",
                     targetFile = "ecoregions.shp", alsoExtract = "similar",
@@ -22,5 +22,6 @@ mpbStudyArea <- function(ecoregions = c(112, 120, 122, 124, 126), targetCRS, cPa
                     destinationPath = dPath) %>%
     st_transform(., targetCRS) ## keep as sf for plotting
 
-  shp[shp$REGION_ID %in% ecoregions, ]
+  shp[shp$REGION_ID %in% ecoregions, ] %>%
+    st_union(.)
 }
