@@ -1,6 +1,19 @@
+utils::globalVariables(c("Year"))
+
+#' MPB red top growth function
+#'
+#' From Cooke and Carroll (2017).
+#'
+#' @param x beetle density
+#' @param s climate suitability factor
+#' @param dataset dataset name used for fitting:
+#'                one of `"Berryman1979_fit"`, `"Berryman1979_forced"`, `"Boone2011"`.
+#' @param growthData MPB red top growth data with which to fit.
+#'
 #' @export
+#' @importFrom amc hill logit
+#' @importFrom stats lm predict poly
 growthFunction <- function(x, s, dataset, growthData) {
-  # switch(P(sim)$dataset,
   switch(dataset,
          "Berryman1979_fit" = {
            # function(x, s, dataset) {
@@ -46,9 +59,21 @@ growthFunction <- function(x, s, dataset, growthData) {
   )
 }
 
+#' MPB recruitment function
+#'
+#' From Cooke & Carroll (2017).
+#'
+#' @param xtminus1 previous year's attack density
+#' @param cs climate suitability factor
+#' @param dataset dataset name used for fitting:
+#'                one of `"Berryman1979_fit"`, `"Berryman1979_forced"`, `"Boone2011"`.
+#' @param massAttacksMap `RasterLayer` of red attack densities
+#' @param growthData MPB red top growth data with which to fit.
+#'
 #' @export
+#' @importFrom raster xres
 xt <- function(xtminus1, cs, dataset, massAttacksMap, growthData) {
-  map.res <- xres(massAttacksMap) ## TODO: fix this, not scoped in this fn
+  map.res <- xres(massAttacksMap)
   per.ha <- 10^growthFunction(log10(xtminus1), cs, dataset, growthData) * xtminus1 ## TODO: something is off about this
   return(map.res * per.ha)
 }

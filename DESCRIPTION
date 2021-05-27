@@ -1,12 +1,42 @@
 Package: mpbutils
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.1
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Title: Utilities for Mountain Pine Beetle Simulation Modelling
+Description: Utilities for mountain pine beetle (MPB) simulation modelling.
+Date: 2021-05-25
+Version: 0.0.1
+Authors@R: 
+    c(person(given = "Eliot J B",
+             family = "McIntire",
+             role = c("aut", "cre"),
+             email = "eliot.mcintire@canada.ca",
+             comment = c(ORCID = "0000-0002-6914-8316")),
+      person(given = "Alex M",
+             family = "Chubaty",
+             role = "aut",
+             email = "achubaty@for-cast.ca",
+             comment = c(ORCID = "0000-0001-7146-8135"))
+     )
+Depends:
+    R (>= 3.6)
+Imports:
+    amc,
+    data.table (>= 1.10.4),
+    magrittr,
+    methods,
+    raster,
+    reproducible,
+    sf,
+    stats,
+    utils
+Suggests:
+    knitr,
+    rmarkdown
+Remotes:
+    achubaty/amc@development
 Encoding: UTF-8
-LazyData: true
+Language: en-CA
+License: GPL-3
+VignetteBuilder: knitr, rmarkdown
+BugReports: https://github.com/PredictiveEcology/mpbutils/issues
+ByteCompile: yes
 RoxygenNote: 7.1.1
