@@ -17,7 +17,7 @@ area. Derived from \url{http://sis.agr.gc.ca/cansis/nsdb/ecostrat/region/ecoregi
 \item{dPath}{destination path}
 }
 \value{
-an `sf` object
+an \code{sf} object
 }
 \description{
 Create study area based o ecoregion selection

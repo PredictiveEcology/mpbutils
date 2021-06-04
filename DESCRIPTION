@@ -39,4 +39,5 @@ License: GPL-3
 VignetteBuilder: knitr, rmarkdown
 BugReports: https://github.com/PredictiveEcology/mpbutils/issues
 ByteCompile: yes
+Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1

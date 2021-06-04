@@ -12,9 +12,9 @@ xt(xtminus1, cs, dataset, massAttacksMap, growthData)
 \item{cs}{climate suitability factor}
 
 \item{dataset}{dataset name used for fitting:
-one of `"Berryman1979_fit"`, `"Berryman1979_forced"`, `"Boone2011"`.}
+one of \code{"Berryman1979_fit"}, \code{"Berryman1979_forced"}, \code{"Boone2011"}.}
 
-\item{massAttacksMap}{`RasterLayer` of red attack densities}
+\item{massAttacksMap}{\code{RasterLayer} of red attack densities}
 
 \item{growthData}{MPB red top growth data with which to fit.}
 }
