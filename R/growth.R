@@ -73,7 +73,8 @@ growthFunction <- function(x, s, dataset, growthData) {
 #' @export
 #' @importFrom raster xres
 xt <- function(xtminus1, cs, dataset, massAttacksMap, growthData) {
-  map.res <- xres(massAttacksMap)
-  per.ha <- 10^growthFunction(log10(xtminus1), cs, dataset, growthData) * xtminus1 ## TODO: something is off about this
-  return(map.res * per.ha)
+  map.NumHaPerPixel <- prod(res(massAttacksMap)) / 1e4
+  per.ha <- 10^growthFunction(log10(xtminus1), cs, dataset,
+                              growthData) * xtminus1
+  return(map.NumHaPerPixel * per.ha)
 }

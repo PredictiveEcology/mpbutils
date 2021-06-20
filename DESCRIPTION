@@ -2,8 +2,8 @@ Package: mpbutils
 Type: Package
 Title: Utilities for Mountain Pine Beetle Simulation Modelling
 Description: Utilities for mountain pine beetle (MPB) simulation modelling.
-Date: 2021-05-25
-Version: 0.1.2
+Date: 2021-06-19
+Version: 0.1.3
 Authors@R: 
     c(person(given = "Eliot J B",
              family = "McIntire",
