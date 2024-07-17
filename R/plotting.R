@@ -52,8 +52,8 @@ plot_CentroidShift <- function(centroids, title) {
 
 #' @export
 plot_HistsOfDEoptimPars <- function(fit_mpbSpreadOptimizer, title) {
-  (paramHists <- fit_mpbSpreadOptimizer %>%
-     ggplot( aes(x=value, fill=Parameter)) +
+  (paramHists <- fit_mpbSpreadOptimizer |>
+     ggplot(aes(x=value, fill=Parameter)) +
      geom_histogram() +# color="#e9ecef", alpha=0.6, position = 'identity') +
      facet_grid(. ~ Parameter, scales = "free") +
      theme_bw() +

@@ -11,7 +11,6 @@ utils::globalVariables(c("."))
 #' @return an `sf` object
 #'
 #' @export
-#' @importFrom magrittr %>%
 #' @importFrom reproducible prepInputs
 #' @importFrom sf st_read st_transform st_union
 mpbStudyArea <- function(ecoregions = c(112, 120, 122, 124, 126), targetCRS, cPath, dPath) {
@@ -19,9 +18,9 @@ mpbStudyArea <- function(ecoregions = c(112, 120, 122, 124, 126), targetCRS, cPa
                     targetFile = "ecoregions.shp", alsoExtract = "similar",
                     fun = "sf::st_read",
                     cacheRepo = cPath,
-                    destinationPath = dPath) %>%
-    st_transform(., targetCRS) ## keep as sf for plotting
+                    destinationPath = dPath) |>
+    st_transform(x = _, targetCRS) ## keep as sf for plotting
 
-  shp[shp$REGION_ID %in% ecoregions, ] %>%
-    st_union(.)
+  shp[shp$REGION_ID %in% ecoregions, ] |>
+    st_union(x = _)
 }

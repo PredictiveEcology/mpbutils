@@ -71,7 +71,7 @@ growthFunction <- function(x, s, dataset, growthData) {
 #' @param growthData MPB red top growth data with which to fit.
 #'
 #' @export
-#' @importFrom raster xres
+#' @importFrom terra res
 xt <- function(xtminus1, cs, dataset, massAttacksMap, growthData) {
   map.NumHaPerPixel <- prod(res(massAttacksMap)) / 1e4
   per.ha <- 10^growthFunction(log10(xtminus1), cs, dataset,

@@ -15,6 +15,8 @@ cumulativeMap <- function(stk, log = TRUE) {
 }
 
 
+#' Cleans the predicted raster
+#'
 #' @param rasLog A RasterLayer of predicted mass attack, on a log scale
 #' @param propPineRas A RasterLayer of proportion pine cover.
 #' @param thresholdAttackTreesMinDetectable A scalar. This will have come from
