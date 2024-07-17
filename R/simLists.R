@@ -37,7 +37,7 @@ binaryStacks <- function(sims, thresholdAttackTreesMinDetectable = 1.4,
 binaryStack <- function(stk, propPineRas, thresholdAttackTreesMinDetectable = 1.4,
                         thresholdPineProportion = 0.3) {
   stk <- maskWPine(stk, propPineRas, thresholdPineProportion)
-  stkList <- raster::unstack(stk)
+  stkList <- terra::as.list(stk)
   stkList <- Map(stak = stkList, yr = seq_along(names(stk)), function(stak, yr) {
     toZero <- stak < (thresholdAttackTreesMinDetectable ^ yr)
     stak[toZero] <- 0
@@ -46,7 +46,7 @@ binaryStack <- function(stk, propPineRas, thresholdAttackTreesMinDetectable = 1.
   })
   # stk[stk < thresholdAttackTreesMinDetectable] <- 0
   # stk[stk >= thresholdAttackTreesMinDetectable] <- 1
-  raster::stack(stkList)
+  terra::rast(stkList)
 }
 
 
@@ -68,17 +68,17 @@ maskWPine <- function(ras, propPineRas, thresholdPineProportion) {
     ras[] <- ras[]*propPineRas[]
   }
 
-  return(raster::stack(ras))
+  return(ras)
 }
 
 probAttack <- function(binStks) {
   yrs <- seq_len(nlayers(binStks[[1]]))
   names(yrs) <- paste0("X", yrs)
   yrProb <- lapply(yrs, function(yr) {
-    yrStk <- raster::stack(lapply(binStks, function(stk) {
+    yrStk <- terra::rast(lapply(binStks, function(stk) {
       stk[[yr]]
     } ))
     sum(yrStk, na.rm = TRUE)/nlayers(yrStk)
   })
-  raster::stack(yrProb)
+  terra::rast(yrProb)
 }
