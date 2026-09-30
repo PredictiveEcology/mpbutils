@@ -32,7 +32,8 @@ Imports:
 Suggests:
     roxygen2
 Remotes:
-    achubaty/amc@development
+    achubaty/amc@development,
+    PredictiveEcology/reproducible@development
 Encoding: UTF-8
 Language: en-CA
 License: GPL-3
